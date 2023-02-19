@@ -1,0 +1,17 @@
+stages:
+  - test
+  - build
+
+test:
+  stage: test
+  script:
+    - pytest
+
+build:
+  stage: build
+  script:
+    - docker build -t mlflow_utils .
+    - docker save mlflow_utils > mlflow_utils.tar
+  artifacts:
+    paths:
+      - mlflow_utils.tar
